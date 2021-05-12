@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainMenuFragment">
+
+    <fragment
+        android:id="@+id/mainMenuFragment"
+        android:name="com.bigosvaap.colaboradores.features.MainMenuFragment"
+        android:label="fragment_main_menu"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_colaboradoresFragment"
+            app:destination="@id/colaboradoresFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_agregarColaboradorFragment"
+            app:destination="@id/agregarColaboradorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/colaboradoresFragment"
+        android:name="com.bigosvaap.colaboradores.features.employees.ColaboradoresFragment"
+        android:label="fragment_colaboradores"
+        tools:layout="@layout/fragment_colaboradores" >
+        <action
+            android:id="@+id/action_colaboradoresFragment_to_colaboradoresListFragment"
+            app:destination="@id/colaboradoresListFragment" />
+        <action
+            android:id="@+id/action_colaboradoresFragment_to_colaboradoresMapFragment"
+            app:destination="@id/colaboradoresMapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/agregarColaboradorFragment"
+        android:name="com.bigosvaap.colaboradores.features.agregaremployee.AgregarColaboradorFragment"
+        android:label="fragment_agregar_colaborador"
+        tools:layout="@layout/fragment_agregar_colaborador" >
+        <action
+            android:id="@+id/action_agregarColaboradorFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/colaboradoresListFragment"
+        android:name="com.bigosvaap.colaboradores.features.employees.list.ColaboradoresListFragment"
+        android:label="fragment_colaboradores_list"
+        tools:layout="@layout/fragment_colaboradores_list" >
+        <action
+            android:id="@+id/action_colaboradoresListFragment_to_colaboradoresMapFragment"
+            app:destination="@id/colaboradoresMapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/colaboradoresMapFragment"
+        android:name="com.bigosvaap.colaboradores.features.employees.map.ColaboradoresMapFragment"
+        android:label="fragment_colaboradores_map"
+        tools:layout="@layout/fragment_colaboradores_map" />
+</navigation>

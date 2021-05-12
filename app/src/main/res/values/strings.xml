@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Colaboradores</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mis_colaboradores">Mis colaboradores</string>
+    <string name="agregar_colaborador">Agregar colaborador</string>
+    <string name="lista_de_colaboradores">Lista de colaboradores</string>
+    <string name="mapa_de_colaboradores">Mapa de colaboradores</string>
+    <string name="guardar">Guardar</string>
+    <string name="id">ID</string>
+    <string name="name">Name</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="email">Email</string>
+</resources>

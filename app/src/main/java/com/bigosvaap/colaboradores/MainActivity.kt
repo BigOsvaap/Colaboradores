@@ -1,11 +1,14 @@
 package com.bigosvaap.colaboradores
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bigosvaap.colaboradores.model.JsonData
 import com.bigosvaap.colaboradores.persistance.EmpleadoDao
 import com.bigosvaap.colaboradores.service.ApiService
+import com.google.firebase.FirebaseApp
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.moshi.Moshi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -16,8 +19,12 @@ import retrofit2.HttpException
 import java.io.File
 import javax.inject.Inject
 
+
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val TAG = MainActivity::class.java.simpleName
 
     @Inject
     lateinit var apiService: ApiService
@@ -25,10 +32,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var empleadoDao: EmpleadoDao
     @Inject
     lateinit var moshi: Moshi
+    @Inject
+    lateinit var  fireStore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         prepopulateDatabase()
 
@@ -64,6 +75,19 @@ class MainActivity : AppCompatActivity() {
                             //Saving Json Content in Room Database
                             if (jsonContent != null) {
                                 empleadoDao.insertAll(jsonContent.data.employess)
+
+                                //Saving data to firestore
+                                jsonContent.data.employess.forEach { empleado ->
+                                    fireStore.collection("empleados")
+                                        .add(empleado.toHashMapOf())
+                                        .addOnSuccessListener { documentReference ->
+                                            Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Log.w(TAG, "Error adding document", e)
+                                        }
+                                }
+
                             }
 
                         }
@@ -77,10 +101,6 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Error :c", Toast.LENGTH_LONG).show()
                 }
             }
-
-
-
-
         }
     }
 

@@ -22,7 +22,17 @@ data class Empleado(
     @field:Json(name = "mail")
     val email: String
 
-)
+){
+
+    fun toHashMapOf() = hashMapOf(
+        "id" to id,
+        "name" to name,
+        "latitude" to location.latitude,
+        "longitude" to location.longitude,
+        "email" to email
+    )
+
+}
 
 @JsonClass(generateAdapter = true)
 data class Location(
